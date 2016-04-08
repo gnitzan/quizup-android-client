@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/interact_background"
+    tools:context=".SplashScreenActivity">
+
+    <com.rom.quizup.client.ui.splash.SplashAnimation
+        android:id="@+id/theAnimation"
+        android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="152dp"/>
+
+    <FrameLayout
+        android:layout_height="44dp"
+        android:layout_width="match_parent"
+        android:background="@color/navy"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

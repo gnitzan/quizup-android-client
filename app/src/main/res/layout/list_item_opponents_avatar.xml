@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/opponentsItemAvatar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/opponentIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@+string/opponentPlayerprofileImage"/>
+
+    <TextView
+        android:id="@+id/opponentItemText"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="60dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="7dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="@drawable/list_item_text"
+        android:textIsSelectable="false"/>
+
+</RelativeLayout>

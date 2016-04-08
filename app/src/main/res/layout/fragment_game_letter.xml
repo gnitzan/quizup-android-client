@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5.5dp"
+    android:clickable="true">
+
+    <TextView
+        android:id="@+id/fragment_game_letter_letterTextView"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@drawable/game_letter_roundedcorner"
+        android:baselineAligned="false"
+        android:clickable="true"
+        android:gravity="center|center_vertical"
+        android:includeFontPadding="false"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
+
+</LinearLayout>

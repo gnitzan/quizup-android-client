@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/lightaqua"
+    android:orientation="vertical"
+    tools:context=".GameActivity">
+
+    <!-- HEADER -->
+
+    <com.rom.quizup.client.ui.game.HeaderView
+        android:id="@+id/gameactivity_fragment_header"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@color/aqua"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+    </com.rom.quizup.client.ui.game.HeaderView>
+
+    <!-- MAIN PART -->
+
+    <RelativeLayout
+        android:id="@+id/sub_content_view"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
+
+        <com.rom.quizup.client.ui.game.BoardLoadingView
+            android:id="@+id/gameactivity_fragment_boardloadingview"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:gravity="center">
+        </com.rom.quizup.client.ui.game.BoardLoadingView>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <com.rom.quizup.client.ui.game.QuestionAnswerPagerView
+                android:id="@+id/gameactivity_fragment_questionanswerpager"
+                android:layout_width="fill_parent"
+                android:layout_height="240dp"
+                android:layout_gravity="top"
+                android:layout_weight="2">
+            </com.rom.quizup.client.ui.game.QuestionAnswerPagerView>
+
+            <com.rom.quizup.client.ui.game.BoardView
+                android:id="@+id/gameactivity_fragment_boardview"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+            </com.rom.quizup.client.ui.game.BoardView>
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

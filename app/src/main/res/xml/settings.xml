@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <Preference
+            android:key="joinGooglePlusPreference"
+            android:summary=""
+            android:title="@string/settings_join_google_plus"/>
+
+        <Preference
+            android:key="switchAccountPreference"
+            android:summary=""
+            android:title="@string/settings_switchaccount_title"/>
+
+        <Preference
+            android:key="accountPreference"
+            android:summary=""
+            android:title="@string/not_logged_in"/>
+
+        <Preference
+            android:key="aboutPreference"
+            android:summary="@string/copyright"
+            android:title="@string/app_name"/>
+
+</PreferenceScreen>

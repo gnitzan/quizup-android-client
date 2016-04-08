@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textPagination"
+        style="@style/GameBoardPaginationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="left"
+        android:paddingLeft="32dp"
+        android:textIsSelectable="false"/>
+
+    <TextView
+        android:id="@+id/textCountdown"
+        style="@style/GameBoardCountdownTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="right"
+        android:paddingRight="32dp"
+        android:textIsSelectable="false"/>
+
+    <com.rom.quizup.client.ui.game.CountdownView
+        android:id="@+id/countdownView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="top"/>
+
+</RelativeLayout>

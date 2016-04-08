@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_id": "quizup-125414",
+    "project_number": "154880045378",
+    "name": "QuizUp"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154880045378:android:3753965ee937fafd",
+        "client_id": "android:com.rom.quizup.client",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.rom.quizup.client",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154880045378-phlr5qlihnm3kbhl9dc9cbki8je4juu7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rom.quizup.client",
+            "certificate_hash": "A282DA96E0626E12F18E8BA0AD17E0748043FAC8"
+          }
+        },
+        {
+          "client_id": "154880045378-4ujpe1c7a8tujadrm9kctvs1qpd60dek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@drawable/tab_button_background_state_selector"
+    android:minWidth="20dp">
+
+    <TextView
+        android:id="@+id/tabTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/not_logged_in"
+        android:textColor="@drawable/tab_button_text_state_selector"
+        android:textSize="14sp"/>
+
+    <FrameLayout
+        android:id="@+id/selectedIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/tab_button_indicator_selector"/>
+
+</RelativeLayout>

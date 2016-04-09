@@ -30,14 +30,14 @@ public class GameBuilder {
     if (board.getQuestions() != null && board.getAnswers() != null
         && board.getQuestions().size() == board.getAnswers().size()) {
 
-      List<QuQuestion> questions = new ArrayList<QuQuestion>();
+      List<QuQuestion> questions = new ArrayList<>();
 
       for (int index = 0; index < board.getQuestions().size(); index++) {
 
         String question = board.getQuestions().get(index);
         String word = board.getAnswers().get(index);
 
-        List<QuLetter> letters = new ArrayList<QuLetter>();
+        List<QuLetter> letters = new ArrayList<>();
         QuWord quWord = new QuWord(letters);
 
         for (Character letter : word.toCharArray()) {
@@ -47,13 +47,13 @@ public class GameBuilder {
         questions.add(new QuQuestion(question, quWord));
       }
 
-      List<List<Character>> boardDefinition = new ArrayList<List<Character>>();
+      List<List<Character>> boardDefinition = new ArrayList<>();
 
       if (board.getGridDefinitions() != null && board.getGridDefinitions().size() > 0) {
 
         for (String row : board.getGridDefinitions()) {
 
-          List<Character> characters = new ArrayList<Character>();
+          List<Character> characters = new ArrayList<>();
 
           for (Character letter : row.toCharArray()) {
             characters.add(letter);
@@ -69,6 +69,7 @@ public class GameBuilder {
       QuGamePlay currentPlayer = new QuGamePlay(me.getPlayer().getId(),
               me.getPlayer().getNickname(), me.getTimeLeft(),
           me.getCorrectAnswers(), me.getIsWinner());
+
       QuGamePlay opponent = null;
 
       if (otherPlayer != null) {

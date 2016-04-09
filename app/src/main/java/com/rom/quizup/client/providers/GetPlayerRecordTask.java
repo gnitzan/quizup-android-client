@@ -12,7 +12,6 @@ import retrofit2.Call;
 /**
  * The purpose of this class is to make an asynchronous call to retrieve a player's multiplayer
  * record
- *
  */
 public class GetPlayerRecordTask extends ServiceTask<Player> {
 
@@ -31,8 +30,7 @@ public class GetPlayerRecordTask extends ServiceTask<Player> {
     QuPlayer model = null;
 
     if (player != null) {
-      model = new QuPlayer(player.getId(), player.getNickname(), player.getStatistics().getNumberOfWins(),
-          player.getStatistics().getNumberOfGames());
+      model = new QuPlayer(player);
     }
 
     listener.onGetPlayerRecordCompleted(model);

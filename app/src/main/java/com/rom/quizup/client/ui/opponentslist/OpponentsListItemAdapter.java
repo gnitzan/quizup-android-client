@@ -1,9 +1,5 @@
 package com.rom.quizup.client.ui.opponentslist;
 
-import com.rom.quizup.client.R;
-import com.rom.quizup.client.helpers.DownloadImageTask;
-import com.rom.quizup.client.ui.opponentslist.models.OpponentItem;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -13,13 +9,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rom.quizup.client.R;
+import com.rom.quizup.client.helpers.DownloadImageTask;
+import com.rom.quizup.client.ui.opponentslist.models.OpponentItem;
+
 /**
  * Adapter used for managing the list of opponents
  */
 public class OpponentsListItemAdapter extends ArrayAdapter<OpponentItem> {
   private final Context context;
-  private int layoutResourceId;
   private final OpponentItem[] values;
+  private int layoutResourceId;
 
   /**
    * Constructor
@@ -43,6 +43,7 @@ public class OpponentsListItemAdapter extends ArrayAdapter<OpponentItem> {
 
     LayoutInflater inflater =
         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
     View rowView = inflater.inflate(layoutResourceId, parent, false);
 
     TextView textView = (TextView) rowView.findViewById(R.id.opponentItemText);

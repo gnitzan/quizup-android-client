@@ -4,7 +4,6 @@ package com.rom.quizup.client.providers;
 import com.rom.quizup.client.ApplicationSettings;
 import com.rom.quizup.client.models.Player;
 import com.rom.quizup.client.models.QuPlayer;
-import com.rom.quizup.client.models.User;
 import com.rom.quizup.client.services.Quizup;
 
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class RegisterPlayerTask extends ServiceTask<Player> {
 
     if (player != null) {
       settings.setPlayerId(player.getId());
-      model = new QuPlayer(player.getId(), player.getNickname(), player.getStatistics().getNumberOfWins(), player.getStatistics().getNumberOfGames());
+      model = new QuPlayer(player);
     }
 
     listener.onRegisterPlayerCompleted(model);

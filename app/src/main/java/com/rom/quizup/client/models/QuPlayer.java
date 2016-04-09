@@ -14,6 +14,7 @@ public class QuPlayer implements Serializable {
   private String playerName;
   private Integer gamesWon;
   private Integer gamesPlayed;
+  private String imgUrl;
 
   /**
    * Constructor
@@ -22,10 +23,20 @@ public class QuPlayer implements Serializable {
    * @param gamesWon The number of multiplayer games won
    * @param gamesPlayed The number of multiplayer games played
    */
-  public QuPlayer(String playerId, String playerName, Integer gamesWon, Integer gamesPlayed) {
+  public QuPlayer(String playerId, String playerName, Integer gamesWon, Integer gamesPlayed, String imgUrl) {
+    this.playerId = playerId;
     this.playerName = playerName;
     this.gamesWon = gamesWon;
     this.gamesPlayed = gamesPlayed;
+    this.imgUrl = imgUrl;
+  }
+
+  public QuPlayer(Player player) {
+    this(player.getId(),
+        player.getNickname(),
+        player.getStatistics().getNumberOfWins(),
+        player.getStatistics().getNumberOfGames(),
+        player.getImageUrl());
   }
 
   /**
@@ -86,5 +97,13 @@ public class QuPlayer implements Serializable {
 
   public void setPlayerId(String playerId) {
     this.playerId = playerId;
+  }
+
+  public String getImgUrl() {
+    return imgUrl;
+  }
+
+  public void setImgUrl(String imgUrl) {
+    this.imgUrl = imgUrl;
   }
 }

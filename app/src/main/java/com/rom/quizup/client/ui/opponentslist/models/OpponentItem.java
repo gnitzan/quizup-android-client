@@ -8,7 +8,6 @@ public class OpponentItem {
   public String id;
   public String content;
   public String imageUrl;
-  public boolean isPlusId = false;
 
   /**
    * Constructor used for Google+ users
@@ -18,20 +17,9 @@ public class OpponentItem {
    * @param imageUrl The url of their profile image
    */
   public OpponentItem(String id, String content, String imageUrl) {
-    this(id, content);
-    this.imageUrl = imageUrl;
-    this.isPlusId = true;
-  }
-
-  /**
-   * Constructor used for adding a general opponent
-   *
-   * @param id The user's ID
-   * @param content The name to display
-   */
-  public OpponentItem(String id, String content) {
     this.id = id;
     this.content = content;
+    this.imageUrl = imageUrl;
   }
 
   /**

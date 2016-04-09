@@ -1,9 +1,16 @@
 package com.rom.quizup.client.ui.opponentslist;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+
 import com.rom.quizup.client.R;
 import com.rom.quizup.client.models.InvitationStatus;
-import com.rom.quizup.client.models.QuInvitation;
 import com.rom.quizup.client.models.Player;
+import com.rom.quizup.client.models.QuInvitation;
 import com.rom.quizup.client.providers.OnCancelInvitationCompleted;
 import com.rom.quizup.client.providers.OnGetOpponentResponseToInvitationCompleted;
 import com.rom.quizup.client.providers.OnGetPlayerListCompleted;
@@ -16,13 +23,6 @@ import com.rom.quizup.client.ui.WaitOverlayFragment;
 import com.rom.quizup.client.ui.lobby.LobbyActivity;
 import com.rom.quizup.client.ui.opponentslist.OpponentListFragment.OpponentListFragmentInteractionListener;
 import com.rom.quizup.client.ui.opponentslist.models.OpponentItem;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -63,7 +63,7 @@ public class OpponentListActivity extends BaseActivity
 
   private TabButton allOpponentsButton;
 
-  private Map<String, OpponentItem> opponents = new LinkedHashMap<String, OpponentItem>();
+  private Map<String, OpponentItem> opponents = new LinkedHashMap<>();
 
   /**
    * Display the "spinny" fragment and begin the loading of either Google+ opponents or general game
@@ -105,13 +105,10 @@ public class OpponentListActivity extends BaseActivity
 
       showInviteDialog();
 
-      if (selectedOpponentItem.isPlusId) {
-        mApplication.getDataProvider().sendInvitation(selectedOpponentItem.id, this);
-      } else {
-        mApplication.getDataProvider().sendInvitation(selectedOpponentItem.id, this);
-      }
+      mApplication.getDataProvider().sendInvitation(selectedOpponentItem.id, this);
 
-    } else {
+    }
+    else {
       ApplicationDialogs.displayAlert(this, getString(R.string.attemptingToCancelinvitation));
     }
 
@@ -128,8 +125,8 @@ public class OpponentListActivity extends BaseActivity
     if (result != null) {
 
       for (Player model : result) {
-        opponents.put(model.getId().toString(),
-            new OpponentItem(model.getId().toString(), model.getNickname()));
+        opponents.put(model.getId(),
+            new OpponentItem(model.getId(), model.getNickname(), model.getImageUrl()));
       }
     }
 
@@ -140,13 +137,15 @@ public class OpponentListActivity extends BaseActivity
     if (fragment != null && fragment.getView() != null) {
       fragment.setList(opponents);
       getFragmentManager().beginTransaction().hide(waitFragment).commit();
+
+      if (!opponents.isEmpty()) {
+        fragment.setShowNoOpponents(false);
+      }
+      else {
+        fragment.setShowNoOpponents(true);
+      }
     }
 
-    if (!opponents.isEmpty()) {
-      fragment.setShowNoOpponents(false);
-    } else {
-      fragment.setShowNoOpponents(true);
-    }
 
   }
 
@@ -163,67 +162,26 @@ public class OpponentListActivity extends BaseActivity
         currentGameId = null;
         inviteDialog.dismiss();
         ApplicationDialogs.displayAlert(this, getString(R.string.playerNotRegisteredInQuizUp));
-      } else {
+      }
+      else {
 
         currentInvitationId = result.getInvitationId();
         currentGameId = result.getGameId();
 
         if (attemptingToCancel) {
           mApplication.getDataProvider().cancelInvitation(currentGameId, currentInvitationId, this);
-        } else {
+        }
+        else {
           timer.schedule(new CheckOpponentInvitationResponse(), 0);
         }
       }
 
-    } else {
+    }
+    else {
       currentInvitationId = null;
       currentGameId = null;
       inviteDialog.dismiss();
       ApplicationDialogs.displayAlert(this, getString(R.string.unableToSendInvitation));
-    }
-  }
-
-  /**
-   * The purpose of this class is to check the status of a sent invitation
-   */
-  private class CheckOpponentInvitationResponse extends TimerTask implements OnGetOpponentResponseToInvitationCompleted {
-
-    @Override
-    public void run() {
-      if (currentGameId != null && currentInvitationId != null) {
-        mApplication.getDataProvider().getOpponentResponseToInvitation(currentGameId, currentInvitationId, this);
-      }
-    }
-
-    @Override
-    public void onGetOpponentResponseToInvitationCompleted(QuInvitation invitation) {
-
-      if (currentInvitationId == null || currentGameId == null || attemptingToCancel) {
-        return;
-      }
-
-      if (invitation != null && invitation.getStatus().equals(InvitationStatus.SENT)) {
-        // run again in 1 second
-        timer.schedule(new CheckOpponentInvitationResponse(), 1000);
-      } else {
-
-        if (inviteDialog != null) {
-          inviteDialog.dismiss();
-        }
-
-        if (invitation != null && invitation.getStatus().equals(InvitationStatus.ACCEPTED)) {
-
-          // send off to lobby
-          Intent intent = new Intent(OpponentListActivity.this, LobbyActivity.class);
-          intent.putExtra(IntentExtras.LOBBY_GAME_TYPE, IntentExtras.LOBBY_MULTI_PLAYER);
-          intent.putExtra(IntentExtras.LOBBY_GAME_ID, currentGameId);
-          startActivityForResult(intent, RequestCodes.REQUEST_GAME_RESULT);
-
-        } else {
-          ApplicationDialogs.displayAlert(OpponentListActivity.this, selectedOpponentItem.content,
-                  OpponentListActivity.this.getString(R.string.challengeDeclined));
-        }
-      }
     }
   }
 
@@ -268,11 +226,13 @@ public class OpponentListActivity extends BaseActivity
 
     if (!result) {
       attemptingToCancel = false;
+
       if (inviteDialog.getContext() != null) {
         inviteDialog.setMessage(this.getString(R.string.opponentAcceptedCantCancel));
         inviteDialog.show();
       }
-    } else {
+    }
+    else {
       // cancel the timer so polling stops
       currentInvitationId = null;
       currentGameId = null;
@@ -297,5 +257,51 @@ public class OpponentListActivity extends BaseActivity
 
   private void loadPlayerList() {
     mApplication.getDataProvider().getPlayerList(this);
+  }
+
+  /**
+   * The purpose of this class is to check the status of a sent invitation
+   */
+  private class CheckOpponentInvitationResponse extends TimerTask implements OnGetOpponentResponseToInvitationCompleted {
+
+    @Override
+    public void run() {
+      if (currentGameId != null && currentInvitationId != null) {
+        mApplication.getDataProvider().getOpponentResponseToInvitation(currentGameId, currentInvitationId, this);
+      }
+    }
+
+    @Override
+    public void onGetOpponentResponseToInvitationCompleted(QuInvitation invitation) {
+
+      if (currentInvitationId == null || currentGameId == null || attemptingToCancel) {
+        return;
+      }
+
+      if (invitation != null && invitation.getStatus().equals(InvitationStatus.SENT)) {
+        // run again in 1 second
+        timer.schedule(new CheckOpponentInvitationResponse(), 1000);
+      }
+      else {
+
+        if (inviteDialog != null) {
+          inviteDialog.dismiss();
+        }
+
+        if (invitation != null && invitation.getStatus().equals(InvitationStatus.ACCEPTED)) {
+
+          // send off to lobby
+          Intent intent = new Intent(OpponentListActivity.this, LobbyActivity.class);
+          intent.putExtra(IntentExtras.LOBBY_GAME_TYPE, IntentExtras.LOBBY_MULTI_PLAYER);
+          intent.putExtra(IntentExtras.LOBBY_GAME_ID, currentGameId);
+          startActivityForResult(intent, RequestCodes.REQUEST_GAME_RESULT);
+
+        }
+        else {
+          ApplicationDialogs.displayAlert(OpponentListActivity.this, selectedOpponentItem.content,
+              OpponentListActivity.this.getString(R.string.challengeDeclined));
+        }
+      }
+    }
   }
 }

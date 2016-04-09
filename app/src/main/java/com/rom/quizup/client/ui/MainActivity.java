@@ -1,15 +1,5 @@
 package com.rom.quizup.client.ui;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.rom.quizup.client.R;
-import com.rom.quizup.client.helpers.DownloadImageTask;
-import com.rom.quizup.client.helpers.OnDownloadImageCompleted;
-import com.rom.quizup.client.models.QuPlayer;
-import com.rom.quizup.client.providers.OnAcceptInvitationCompleted;
-import com.rom.quizup.client.providers.OnDeclineInvitationCompleted;
-import com.rom.quizup.client.ui.lobby.LobbyActivity;
-import com.rom.quizup.client.ui.opponentslist.OpponentListActivity;
-
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -23,6 +13,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.rom.quizup.client.R;
+import com.rom.quizup.client.helpers.DownloadImageTask;
+import com.rom.quizup.client.helpers.OnDownloadImageCompleted;
+import com.rom.quizup.client.models.QuPlayer;
+import com.rom.quizup.client.providers.OnAcceptInvitationCompleted;
+import com.rom.quizup.client.providers.OnDeclineInvitationCompleted;
+import com.rom.quizup.client.ui.lobby.LobbyActivity;
+import com.rom.quizup.client.ui.opponentslist.OpponentListActivity;
 
 /**
  * The purpose of this activity is for providing the player with a main landing screen to display
@@ -39,7 +39,6 @@ public class MainActivity extends BaseActivity
 
   private static QuPlayer quPlayer;
   private static Bitmap userProfileImage;
-  private static String userDisplayName;
 
   private AlertDialog acceptingChallengeDialog;
 
@@ -74,8 +73,7 @@ public class MainActivity extends BaseActivity
 
     // if the intent exists
     if (getIntent().hasExtra(QuPlayer.TAG)) {
-      quPlayer =
-          (QuPlayer) getIntent().getSerializableExtra(QuPlayer.TAG);
+      quPlayer = (QuPlayer) getIntent().getSerializableExtra(QuPlayer.TAG);
     }
 
     displayPlayerRecord();
@@ -157,24 +155,19 @@ public class MainActivity extends BaseActivity
     ImageView profileImage = (ImageView) findViewById(R.id.user_image);
     TextView text = (TextView) findViewById(R.id.userNameText);
 
-    if (!mApplication.getApplicationSettings().getUsingGooglePlus()) {
-      text.setText(mApplication.getSelectedAccountName());
-      profileImage.setImageResource(R.drawable.avatar_large);
+    if (userProfileImage != null) {
+      profileImage.setImageBitmap(userProfileImage);
       profileImage.invalidate();
     } else {
-      if (userProfileImage != null) {
-        profileImage.setImageBitmap(userProfileImage);
-        profileImage.invalidate();
-      } else {
-        profileImage.setImageResource(R.drawable.avatar_large);
-        profileImage.invalidate();
-      }
+      profileImage.setImageResource(R.drawable.avatar_large);
+      profileImage.invalidate();
+    }
 
-      if (userDisplayName != null) {
-        text.setText(userDisplayName);
-      } else {
-        text.setText(mApplication.getSelectedAccountName());
-      }
+    if (quPlayer.getPlayerName() != null) {
+      text.setText(quPlayer.getPlayerName());
+    }
+    else {
+      text.setText(mApplication.getSelectedAccountName());
     }
 
     TextView stats = (TextView) findViewById(R.id.userStatsText);
@@ -188,6 +181,11 @@ public class MainActivity extends BaseActivity
     } else {
       stats.setText(getString(R.string.noGamesPlayedMessage));
     }
+
+    if (quPlayer.getImgUrl() != null) {
+      new DownloadImageTask(profileImage, this).execute(quPlayer.getImgUrl());
+    }
+
   }
 
   /**

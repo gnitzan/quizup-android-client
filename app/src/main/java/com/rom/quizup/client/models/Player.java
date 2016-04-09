@@ -8,6 +8,7 @@ public class Player {
   private String id;
   private String nickname;
   private PlayerStatistics statistics;
+  private String imageUrl;
 
   /**
    * Constructor
@@ -63,15 +64,24 @@ public class Player {
     return statistics;
   }
 
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
 
-    sb.append("\n--------------------------------------------\n");
+    sb.append("\n------------------------------------------------------------------------------\n");
     sb.append("Player:\n");
     sb.append("playerId:    ").append(id).append("\n");
     sb.append("nickName:    ").append(nickname).append("\n");
-    sb.append("--------------------------------------------\n");
+    sb.append("imageUrl:    ").append(imageUrl).append("\n");
+    sb.append("--------------------------------------------------------------------------------\n");
 
     return sb.toString();
   }

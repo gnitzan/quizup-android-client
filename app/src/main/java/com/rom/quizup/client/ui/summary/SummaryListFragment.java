@@ -11,15 +11,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.rom.quizup.client.R;
 import com.rom.quizup.client.models.QuGame;
 import com.rom.quizup.client.models.QuQuestion;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The purpose of this fragment is to manage the overall layout of the activity such as the header
@@ -31,7 +29,12 @@ public class SummaryListFragment extends ListFragment {
   private GameSummaryItemAdapter listViewAdapter;
   private QuGame quGame;
   private OnSummaryListFragmentInteractionListener mListener;
-
+  private OnClickListener homeOnClickListener = new OnClickListener() {
+    @Override
+    public void onClick(View v) {
+      SummaryListFragment.this.getActivity().finish();
+    }
+  };
 
   /**
    * Constructor
@@ -78,21 +81,21 @@ public class SummaryListFragment extends ListFragment {
     int playerCorrectGuesses = quGame.getCurrentPlayer().getAnswerIndexes().size();
 
     List<QuQuestion> questions = quGame.getBoard().getQuestions();
-    Map<String, WordGuessResult> listItems = new HashMap<>();
+
+    Map<Integer, WordGuessResult> listItems = new HashMap<>();
+
+    int questionId = 0;
 
     for (QuQuestion question : questions) {
-      listItems.put(question.getWord().toString(),  new WordGuessResult(question.getWord().toString(), false, false));
+      listItems.put(questionId++, new WordGuessResult(question.getWord().toString(), false, false));
     }
 
     List<Integer> playerCorrectIndexes = quGame.getCurrentPlayer().getAnswerIndexes();
 
     for (Integer index : playerCorrectIndexes) {
-      List<String> keys = new ArrayList<>();
-      keys.addAll(listItems.keySet());
-
       try {
 
-        WordGuessResult wgr = listItems.get(keys.get(index));
+        WordGuessResult wgr = listItems.get(index);
 
         wgr.player1GuessedCorrect = true;
       }
@@ -119,12 +122,9 @@ public class SummaryListFragment extends ListFragment {
       int opponentCorrectGuesses = quGame.getOpponent().getAnswerIndexes().size();
 
       for (Integer index : opponentCorrectIndexes) {
-        List<String> keys = new ArrayList<>();
-        keys.addAll(listItems.keySet());
-
         try {
 
-          WordGuessResult wgr = listItems.get(keys.get(index));
+          WordGuessResult wgr = listItems.get(index);
 
           wgr.player2GuessedCorrect = true;
         }
@@ -167,13 +167,6 @@ public class SummaryListFragment extends ListFragment {
 
     setListAdapter(listViewAdapter);
   }
-
-  private OnClickListener homeOnClickListener = new OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      SummaryListFragment.this.getActivity().finish();
-    }
-  };
 
   /**
    * Assign the listener to the activity

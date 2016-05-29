@@ -7,7 +7,7 @@ package com.rom.quizup.client.models;
 
 public class PlayerStatistics {
     private int numberOfWins = 0;
-    private int numberofGames = 0;
+    private int numberOfGames = 0;
 
     /**
      * Constructor
@@ -19,7 +19,7 @@ public class PlayerStatistics {
      */
     public PlayerStatistics(int numberOfWins, int numberOfGames) {
         this.numberOfWins = numberOfWins;
-        this.numberofGames = numberOfGames;
+        this.numberOfGames = numberOfGames;
     }
 
     /**
@@ -35,6 +35,6 @@ public class PlayerStatistics {
      *
      */
     public int getNumberOfGames() {
-        return numberofGames;
+        return numberOfGames;
     }
 }

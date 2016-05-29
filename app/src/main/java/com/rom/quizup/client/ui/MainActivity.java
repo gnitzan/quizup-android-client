@@ -189,8 +189,7 @@ public class MainActivity extends BaseActivity
     if (quPlayer.getGamesPlayed() > 0) {
 
       String statsText = String.format(
-          getString(R.string.userStatsText), quPlayer.getGamesWon(),
-          quPlayer.getGamesPlayed());
+          getString(R.string.userStatsText), quPlayer.getGamesWon(), quPlayer.getGamesPlayed());
       stats.setText(statsText);
     } else {
       stats.setText(getString(R.string.noGamesPlayedMessage));

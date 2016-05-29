@@ -44,6 +44,7 @@
     <string name="singlePlayerButton">SINGLE PLAYER</string>
     <string name="user_image_desc">user image</string>
     <string name="noGamesPlayedMessage">Race against the clock to solve riddles!</string>
+    <string name="aboutMeButton">About</string>
 
     <!-- GameSummaryActivity -->
     <string name="playAgain">Play again</string>
@@ -138,7 +139,6 @@
     <string name="desc_id_token_activity">Retrieving an ID Token for the user.</string>
     <string name="desc_auth_code_activity">Demonstrate retrieving an auth code for authorizing your server.</string>
     <string name="name_auth_code_activity">ServerAuthCodeActivity</string>
-
 
 
 </resources>

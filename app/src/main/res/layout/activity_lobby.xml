@@ -29,22 +29,14 @@
             android:textIsSelectable="true"
             android:textSize="172sp"/>
 
-        <com.rom.quizup.client.ui.splash.SplashAnimation
-            android:id="@+id/countdownAnimation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="152dp" >
-        </com.rom.quizup.client.ui.splash.SplashAnimation>
 
         <RelativeLayout
             android:id="@+id/messageContainer"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:background="@color/navy"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:background="@color/navy">
 
             <LinearLayout
                 android:id="@+id/innerContainer"

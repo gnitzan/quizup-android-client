@@ -120,7 +120,7 @@
 
     <style name="QuizupBaseButtonStyle" parent="android:Widget.Holo.Light.Button">
         <item name="android:background">@drawable/button_background_state_selector</item>
-        <item name="android:textColor">@drawable/button_background_state_selector</item>
+        <item name="android:textColor">@drawable/button_text_state_selector</item>
     </style>
 
    <style name="QuizupButtonStyle" parent="QuizupBaseButtonStyle">

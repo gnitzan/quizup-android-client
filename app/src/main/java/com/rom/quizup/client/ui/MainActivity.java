@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.rom.quizup.client.AboutActivity;
 import com.rom.quizup.client.R;
 import com.rom.quizup.client.helpers.DownloadImageTask;
 import com.rom.quizup.client.helpers.OnDownloadImageCompleted;
@@ -53,6 +54,8 @@ public class MainActivity extends BaseActivity
     loadData();
 
     handleNotificationInvitationIntent(getIntent());
+
+
   }
 
   /**
@@ -141,6 +144,17 @@ public class MainActivity extends BaseActivity
   public void onChallengeOpponentButtonClick(View v) {
     startActivityForResult(
         new Intent(this, OpponentListActivity.class), RequestCodes.REQUEST_GAME_RESULT);
+  }
+
+  /**
+   * Occurs when the user clicks the button to go to about me
+   *
+   * @param v The View
+   */
+  public void onAboutButtonClick(View v) {
+    Intent intent = new Intent(this, AboutActivity.class);
+
+
   }
 
   /**
